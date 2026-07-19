@@ -66,6 +66,13 @@
     display:inline-block; font-size:1.1rem; transform:rotate(-8deg);
     animation:wag 1.6s ease-in-out infinite; transform-origin:bottom left;
   }
+  .icon {
+  width: 50px;       /* Tamaño del icono */
+  height: 50px;
+  vertical-align: middle;
+  margin-right: 3px; /* Separación con el texto */
+  object-fit: contain;
+}
   @keyframes wag{0%,100%{transform:rotate(-14deg);} 50%{transform:rotate(10deg);}}
   
   .navlinks{display:flex; gap:36px; font-size:0.95rem; font-weight:500; align-items:center;}
@@ -253,12 +260,45 @@
   50% { opacity: 0.4; }
 }
   /* MARQUEE */
-  .marquee{
-    background:var(--ink); color:var(--paper); padding:14px 0; overflow:hidden;
-    white-space:nowrap; font-family:'Fraunces', serif; font-size:1.05rem; font-weight:500;
-  }
-  .marquee-track{display:inline-block; animation:scroll 22s linear infinite;}
-  .marquee-track span{margin:0 28px; opacity:0.85;}
+ .marquee {
+  /* Fondo suave y armónico que no rompe el diseño */
+  background: #CFE8F3; 
+  /* Color de texto legible y elegante */
+  color: #2C3E50; 
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  border-top: 1px solid rgba(44, 62, 80, 0.2);    /* Línea superior */
+  border-bottom: 1px solid rgba(44, 62, 80, 0.2); /* Línea inferior */
+}
+
+.marquee-track {
+  display: inline-block;
+  /* Tu animación de movimiento infinito */
+  animation: scroll 22s linear infinite;
+  
+}
+
+.marquee-track span {
+  margin: 0 28px;
+  /* Esto es clave: alinea el icono y el texto en el mismo eje horizontal */
+  display: inline-flex; 
+  align-items: center;
+  opacity: 1; /* Eliminamos la opacidad para que el texto resalte más */
+  
+}
+
+/* Ajuste para que el icono se mueva junto con el texto */
+.marquee-track span img {
+  margin-right: 10px;
+  width: 24px;
+  height: 24px;
+  /* Esto evita que el icono se mueva raro al deslizarse */
+  display: inline-block; 
+}
   @keyframes scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
 
   /* SERVICES */
@@ -917,14 +957,15 @@
 
 <div class="marquee">
   <div class="marquee-track">
-    <span>🐾 Baño con productos hipoalergénicos</span>
-    <span>🐾 Corte por raza y estilo</span>
-    <span>🐾 Spa de patitas</span>
-    <span>🐾 Atención sin jaulas de espera</span>
-    <span>🐾 Baño con productos hipoalergénicos</span>
-    <span>🐾 Corte por raza y estilo</span>
-    <span>🐾 Spa de patitas</span>
-    <span>🐾 Atención sin jaulas de espera</span>
+    <span><img src="img/banos.webp" alt="Baño" class="icon"> Baño con productos hipoalergénicos</span>
+    <span><img src="img/corte2.webp" alt="Corte" class="icon"> Corte por raza y estilo</span>
+    <span><img src="img/patas.webp" alt="Spa" class="icon"> Spa de patitas</span>
+    <span><img src="img/jaula.webp" alt="Atención" class="icon"> Atención libre de jaulas</span>
+    <span><img src="img/banos.webp" alt="Baño" class="icon"> Baño con productos hipoalergénicos</span>
+    <span><img src="img/corte2.webp" alt="Corte" class="icon"> Corte por raza y estilo</span>
+    <span><img src="img/patas.webp" alt="Spa" class="icon"> Spa de patitas</span>
+    <span><img src="img/jaula.webp" alt="Atención" class="icon"> Atención libre de jaulas</span>
+     
   </div>
 </div>
 
@@ -1383,6 +1424,7 @@
     <i class="fab fa-instagram"></i>
   </a>
 </footer>
+
 <script>
   // 1. MENU TOGGLE
   const menuToggle = document.querySelector('.menu-toggle');
@@ -1396,7 +1438,7 @@
   navlinks?.addEventListener('click', function(e) {
     if (e.target.tagName === 'A' || e.target.closest('button')) {
       navlinks.classList.remove('active');
-      if(menuToggle) menuToggle.textContent = '☰';
+      menuToggle.textContent = '☰';
     }
   });
 
@@ -1404,16 +1446,17 @@
   const slider = document.getElementById('slider');
   const afterPane = document.getElementById('afterPane');
   const handle = document.getElementById('handle');
-  
   slider?.addEventListener('input', (e) => {
     const val = e.target.value;
-    if(afterPane) afterPane.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-    if(handle) handle.style.left = val + '%';
+    afterPane.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+    handle.style.left = val + '%';
   });
 
-  // 3. CARRUSEL DRIVE SCRIPT JS
-  const URL_DEL_JSON = "https://script.google.com/macros/s/AKfycbzVlIqf3IgMYr647BZEz27tSgfYijzIpefk7bkmALPmPJe778w2WLuugw9IB8xEZmTL/exec"; 
-  
+  /// 3. CARRUSEL DRIVE
+  const API_KEY = 'AIzaSyCUSSt9x_8q6Q_lx3BhMcyTYHd5ADekswk';
+  const FOLDER_ID = '1TBOEzjzSqO0_2ghi2wnkpL8hyRGD6stV';
+  const DRIVE_API_URL = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType+contains+'image/'+and+explicitlyTrashed=false&fields=files(id,name,thumbnailLink)&orderBy=createdTime desc&key=${API_KEY}`;
+
   async function cargarFotosDrive() {
     const carousel = document.getElementById('carousel');
     const loadingEl = document.getElementById('drive-carousel-loading');
@@ -1425,34 +1468,29 @@
     if (!carousel) return;
 
     try {
-      const response = await fetch(URL_PROXY + encodeURIComponent(URL_DEL_JSON), {
-        method: 'GET',
-        mode: 'cors',
-        redirect: 'follow'
-      });
-
-      if (!response.ok) throw new Error('Error al conectar con la fuente');
-      const data = await response.json(); 
-      
+      const response = await fetch(DRIVE_API_URL);
+      if (!response.ok) throw new Error('Error al conectar con Drive');
+      const data = await response.json();
       if (loadingEl) loadingEl.remove();
 
-      if (!data || data.length === 0) {
-        carousel.innerHTML = "<p style='text-align:center; width:100%;'>No hay fotos</p>";
+      if (!data.files || data.files.length === 0) {
+        carousel.innerHTML = "<p style='text-align:center; width:100%;'>No hay fotos para mostrar</p>";
         return;
       }
 
-      data.forEach((file) => {
+      data.files.forEach((file) => {
         const slideDiv = document.createElement('div');
         slideDiv.className = "carousel-slide";
         const img = document.createElement('img');
-        img.src = file.url; 
+        img.src = file.thumbnailLink? file.thumbnailLink.replace(/=s\d+/, '=s1000') : `https://drive.google.com/uc?export=view&id=${file.id}`;
         img.alt = file.name;
         img.loading = "lazy";
         slideDiv.appendChild(img);
         carousel.insertBefore(slideDiv, instagramCard);
       });
 
-      // LÓGICA DE MOVIMIENTO
+      // ---- LÓGICA DE MOVIMIENTO ----
+      const slides = carousel.querySelectorAll('.carousel-slide');
       const allSlides = carousel.children;
       let currentIndex = 0;
 
@@ -1463,9 +1501,11 @@
       }
 
       function updateCarousel() {
-        if (allSlides.length === 0) return;
-        const slideWidth = allSlides[0].offsetWidth + 20; 
-        carousel.scrollTo({ left: currentIndex * slideWidth, behavior: 'smooth' });
+        const slideWidth = allSlides[0].offsetWidth + 20; // 20 es el gap
+        carousel.scrollTo({
+          left: currentIndex * slideWidth,
+          behavior: 'smooth'
+        });
         updateIndicators();
       }
 
@@ -1475,52 +1515,69 @@
         const totalDots = Math.max(1, allSlides.length - getVisibleSlides() + 1);
         for (let i = 0; i < totalDots; i++) {
           const dot = document.createElement('button');
-          dot.className = `indicator-dot ${i === currentIndex ? 'active' : ''}`;
-          dot.onclick = () => { currentIndex = i; updateCarousel(); };
+          dot.className = `indicator-dot ${i === currentIndex? 'active' : ''}`;
+          dot.addEventListener('click', () => {
+            currentIndex = i;
+            updateCarousel();
+          });
           indicatorsContainer.appendChild(dot);
         }
       }
 
       nextBtn?.addEventListener('click', () => {
-        currentIndex = currentIndex >= (allSlides.length - getVisibleSlides()) ? 0 : currentIndex + 1;
+        const maxIndex = allSlides.length - getVisibleSlides();
+        currentIndex = currentIndex >= maxIndex? 0 : currentIndex + 1;
         updateCarousel();
       });
 
       prevBtn?.addEventListener('click', () => {
-        currentIndex = currentIndex <= 0 ? (allSlides.length - getVisibleSlides()) : currentIndex - 1;
+        const maxIndex = allSlides.length - getVisibleSlides();
+        currentIndex = currentIndex <= 0? maxIndex : currentIndex - 1;
         updateCarousel();
       });
 
-      // Swipe
+      // Swipe en mobile
       let startX = 0;
       carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX);
       carousel.addEventListener('touchend', e => {
         const diff = startX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) diff > 0 ? nextBtn?.click() : prevBtn?.click();
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) nextBtn.click();
+          else prevBtn.click();
+        }
       });
 
-      window.addEventListener('resize', updateCarousel);
       updateIndicators();
+      window.addEventListener('resize', updateCarousel);
 
     } catch (error) {
-      console.error("Error Drive:", error);
-      if (loadingEl) loadingEl.innerHTML = "<p style='color:red;'>Error al cargar imágenes</p>";
+      console.error("Error al cargar Drive:", error);
+      if (loadingEl) loadingEl.innerHTML = "<p style='color:red;'>No se pudieron cargar las fotos</p>";
     }
   }
-
   // 4. FORMULARIO RESERVA
   document.getElementById('formReserva')?.addEventListener('submit', function(e) {
     e.preventDefault();
-    if (!document.getElementById('aceptoPoliticas')?.checked) {
-      alert("Debes aceptar las políticas para continuar.");
+    
+    // Validación checkbox
+    const acepto = document.getElementById('aceptoPoliticas')?.checked;
+    if (!acepto) {
+      alert("Debes aceptar las políticas de atención para continuar.");
       return;
     }
 
-    const m = `Hola, quiero reservar turno:%0A%0A*Mascota:* ${document.getElementById('nombre').value}%0A*Raza:* ${document.getElementById('raza').value}%0A*Peso:* ${document.getElementById('peso')?.value || 'N/A'} kg%0A*Fecha:* ${document.getElementById('fecha').value}%0A*Comentario:* ${document.getElementById('comentario').value}`;
-    window.open(`https://wa.me/5491168959253?text=${m}`, '_blank');
+    // Envío WhatsApp
+    const nombre = document.getElementById('nombre').value;
+const raza = document.getElementById('raza').value;
+const peso = document.getElementById('peso')?.value || 'No especificado';
+const fecha = document.getElementById('fecha').value;
+const comentario = document.getElementById('comentario').value;
+const numeroWhatsApp = "5491168959253";
+const mensaje = `Hola, quiero reservar un turno:%0A%0A*Mascota:* ${nombre}%0A*Raza:* ${raza}%0A*Peso:* ${peso} kg%0A*Fecha:* ${fecha}%0A*Comentario:* ${comentario}`;
+window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
   });
 
-  // INICIALIZACIÓN
+  // EJECUCIÓN INICIAL
   document.addEventListener('DOMContentLoaded', cargarFotosDrive);
 </script>
 </body>
