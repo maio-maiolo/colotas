@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colotas | Dog Barber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Work+Sans:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="icon" href="img/icono2.ico" type="image/x-icon">
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono2.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icono2.png">
+<link rel="apple-touch-icon" href="img/icono2.png">
+<style>
+  :root{
+    --ink:#1F2A22;
+    --paper:#F1F3EC;
+    --card:#FFFFFF;
+    --apricot:#E8935C;
+    --teal:#4F8C82;
+    --gold:#F0B94A;
+    --line: rgba(31,42,34,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .paws{
+    position:absolute; inset:0; pointer-events:none; opacity:0.05;
+    background-image: radial-gradient(circle at 2px 2px, var(--ink) 1.6px, transparent 1.6px);
+    background-size: 34px 34px;
+  }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:#FFFFFF;
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px; max-width:1180px; margin:0 auto; height:80px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:12px;
+  }
+  .logo img{height:120px; width:auto;}
+  .logo-text{display:flex; flex-direction:column; line-height:1.1;}
+  .main-title{
+    font-family:'Fraunces', serif; font-size:1.4rem; font-weight:700; color:var(--ink);
+  }
+  .sub-title{
+    font-family:'Work Sans', sans-serif; font-size:0.75rem;
+    letter-spacing:0.05em; text-transform:uppercase; color:var(--teal);
+  }
+  .logo .tail{
+    display:inline-block; font-size:1.1rem; transform:rotate(-8deg);
+    animation:wag 1.6s ease-in-out infinite; transform-origin:bottom left;
+  }
+  @keyframes wag{0%,100%{transform:rotate(-14deg);} 50%{transform:rotate(10deg);}}
+  
+  .navlinks{display:flex; gap:36px; font-size:0.95rem; font-weight:500; align-items:center;}
+  
+  .navlinks a{
+    position: relative; 
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .navlinks a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px;
+    background:var(--apricot); transition:width .25s ease;
+  }
+  
+  .navlinks a:hover::after{
+    width: 100%;
+  }
+
+  .navlinks a i{
+    font-size: 0.95em;
+    opacity: 0.85;
+    transition: all .2s ease;
+  }
+
+  .navlinks a:hover i{
+    opacity: 1;
+    color: var(--apricot);
+    transform: translateX(-2px);
+  }
+
+  .navlinks a.cta-btn::after{
+    display: none;
+  }
+
+  .navlinks a.cta-btn i{
+    opacity: 1;
+    color: #fff;
+  }
+
+  .navlinks a.cta-btn:hover i{
+    color: #fff;
+    transform: scale(1.1);
+  }
+
+  .cta-btn{
+    background: var(--teal); 
+    color: #fff; 
+    padding: 16px 48px;
+    border-radius: 100px; 
+    font-size: 0.9rem;   
+    font-weight: 600;
+    line-height: 1;      
+    transition: all .25s ease;
+    box-shadow: 0 6px 20px rgba(79,140,130,0.25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 2px solid var(--teal);
+    letter-spacing: 0.01em;
+    min-height: 52px;
+    min-width: 200px;
+    text-align: center;
+  }
+
+  .cta-btn:hover{ 
+    background: var(--apricot); 
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(232,147,92,0.4);
+    border-color: var(--apricot);
+  }
+
+  .cta-btn::after {
+    content: none !important;
+    width: 0 !important;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% { box-shadow: 0 4px 14px rgba(79,140,130,0.3); }
+    50% { box-shadow: 0 4px 20px rgba(79,140,130,0.5); }
+  }
+  .cta-btn {
+    animation: pulse-subtle 4s ease-in-out infinite;
+  }
+  
+  .menu-toggle{display:none; cursor:pointer; font-size:2rem; border:none; background:none;}
+
+  /* HERO */
+  /* HERO */
+.hero {
+  position: relative; 
+  padding: 120px 0 70px; 
+  overflow: hidden;
+  /* Añadimos estas líneas */
+  background-image: url('img/nubes.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+  .hero .wrap{position:relative; z-index:2; display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;}
+  .eyebrow{font-family:'Caveat', cursive; font-size:2.4rem; color:var(--teal); display:inline-block; margin-bottom:6px; transform:rotate(-2deg);}
+  .hero h1{font-size:clamp(3rem, 6vw, 4.6rem); line-height:0.98; margin-bottom:22px;}
+  .hero h1 em{font-style:italic; color:var(--apricot);}
+  .hero p.lead{font-size:1.15rem; max-width:440px; line-height:1.55; color:#41503f; margin-bottom:32px;}
+  .hero-ctas{display:flex; gap:16px; align-items:center;}
+  .btn-primary{
+    background:var(--apricot); color:#fff; padding:15px 28px; border-radius:100px;
+    font-weight:600; box-shadow:0 8px 20px rgba(232,147,92,0.35); transition:transform .2s ease;
+  }
+  .btn-primary:hover{transform:translateY(-3px);}
+  .btn-ghost{font-weight:600; border-bottom:2px solid var(--ink); padding-bottom:3px;}
+ .hero-visual {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.dog-card {
+  position: relative;
+  background: #e8f5f0;
+  border-radius: 24px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.dog-card:hover {
+  transform: translateY(-4px);
+}
+
+.badge-float {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.background-nubes {
+  background-image: url('img/nubes.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #00c851;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.dog {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.dog img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+  /* MARQUEE */
+  .marquee{
+    background:var(--ink); color:var(--paper); padding:14px 0; overflow:hidden;
+    white-space:nowrap; font-family:'Fraunces', serif; font-size:1.05rem; font-weight:500;
+  }
+  .marquee-track{display:inline-block; animation:scroll 22s linear infinite;}
+  .marquee-track span{margin:0 28px; opacity:0.85;}
+  @keyframes scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+  /* SERVICES */
+  .services{padding:110px 0 90px;}
+  .section-head{max-width:560px; margin-bottom:56px;}
+  .section-head .eyebrow{color:var(--apricot);}
+  .section-head h2{font-size:clamp(3.2rem,3.6vw,2.8rem);}
+  .grid-services{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .service-card{
+    background:var(--card); border-radius:24px; padding:34px 28px;
+    border:1px solid var(--line); transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .service-card:hover{transform:translateY(-6px); box-shadow:0 20px 40px -18px rgba(31,42,34,0.25);}
+  .service-icon{
+    width:50px; height:50px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; margin-bottom:20px;
+  }
+  .service-card h3{font-size:1.25rem; margin-bottom:10px;}
+  .service-card p{font-size:0.92rem; color:#54604f; line-height:1.5;}
+  .service-card .price{display:block; margin-top:18px; font-family:'Fraunces',serif; font-weight:600; color:var(--teal);}
+
+  /* CARRUSEL GALERÍA - MISMO FONDO QUE HERO / INICIO - VÍVIDO */
+  #galeria {
+    position: relative;
+    z-index: 1;
+    background-image: url('img/nubes.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #9AC8F5; /* fallback igual al celeste del hero */
+    padding: 80px 0 70px;
+  }
+  /* asegurar que las fotos no se vean opacas */
+  #galeria #carousel img {
+    opacity: 1 !important;
+    filter: none !important;
+    background: #fff;
+    border: 3px solid #fff;
+  }
+  #galeria .group-arrows {position: relative; max-width: 1024px; margin: 0 auto; padding: 0 60px;}
+  #galeria #prevBtn, #galeria #nextBtn{
+  background: #fff;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#galeria #prevBtn i, #galeria #nextBtn i{
+  font-size: 1.3rem;
+  color: var(--teal);
+  transition: all .2s ease;
+}
+
+/* la de la izquierda mirando para atrás */
+#prevBtn i{
+  transform: rotate(-25deg);
+}
+#nextBtn i{
+  transform: rotate(25deg);
+}
+
+#galeria #prevBtn:hover, #galeria #nextBtn:hover{
+  background: var(--teal);
+  transform: translateY(-50%) scale(1.1);
+}
+
+#galeria #prevBtn:hover i, #galeria #nextBtn:hover i{
+  color: #fff;
+}
+  #carousel {
+    display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1.25rem; 
+    overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; 
+    padding: 0.5rem 0 1.5rem 0; -webkit-overflow-scrolling: touch;
+  }
+  #carousel > div {flex: 0 0 auto; scroll-snap-align: start; width: 100%;}
+  @media (min-width: 640px) {#carousel > div {width: calc(50% - 0.625rem);}}
+  @media (min-width: 1024px) {#carousel > div {width: calc(33.333% - 0.833rem);}}
+  #carousel img {
+    width: 100%; height: 16rem; object-fit: cover; border-radius: 1rem;
+    box-shadow: 0 8px 20px -6px rgba(0,0,0,0.15); background: #e5e7eb;
+  }
+  #galeria #prevBtn, #galeria #nextBtn {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 30;
+    background: white; color: var(--ink); width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12); border: 1px solid var(--line); cursor: pointer;
+  }
+  #galeria #prevBtn:hover, #galeria #nextBtn:hover {
+    background: var(--teal); color: white; transform: translateY(-50%) scale(1.05);
+  }
+  #galeria #prevBtn {left: 0;}
+  #galeria #nextBtn {right: 0;}
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .indicator-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #d1d5db; transition: all 0.3s; cursor: pointer; border: none;
+  }
+  .indicator-dot.active {width: 28px; border-radius: 4px; background: var(--teal);}
+
+  /* TRANSFORM */
+  .transform{padding:90px 0; background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .transform .wrap{display:grid; grid-template-columns:0.9fr 1.1fr; gap:60px; align-items:center;}
+  .compare{position:relative; border-radius:28px; overflow:hidden; aspect-ratio:4/3.2; background:#EFE6D8;}
+  .compare-before, .compare-after{position:absolute; inset:0; overflow:hidden;}
+  .compare-before img, .compare-after img{width:100%; height:100%; object-fit:cover; display:block;}
+  .compare-label{position:absolute; top:18px; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; background:rgba(31,42,34,0.85); color:#fff; padding:6px 12px; border-radius:100px; font-family:'Work Sans';}
+  .label-before{left:18px;}
+  .label-after{right:18px;}
+  .compare-handle{position:absolute; top:0; bottom:0; left:50%; width:3px; background:#fff; box-shadow:0 0 0 4px rgba(255,255,0.5);}
+  .compare-handle::after{
+    content:'↔'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:40px; height:40px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; box-shadow:0 6px 16px rgba(0,0,0,0.2);
+  }
+  .compare input[type=range]{position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; margin:0;}
+  .transform-copy .eyebrow{color:var(--teal);}
+  .transform-copy h2{font-size:clamp(2rem,3.4vw,2.6rem); margin-bottom:18px;}
+  .transform-copy p{color:#41503f; line-height:1.6; margin-bottom:22px; max-width:420px;}
+  .steps{list-style:none; display:flex; flex-direction:column; gap:14px;}
+  .steps li{display:flex; gap:14px; align-items:flex-start; font-size:0.95rem;}
+  .steps .num{font-family:'Fraunces',serif; font-weight:600; color:var(--apricot); font-size:1.05rem;}
+
+  /* PRICING */
+  .pricing{padding:110px 0;}
+  .grid-pricing{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .price-card{border-radius:24px; padding:36px 30px; border:1px solid var(--line); background:var(--card); display:flex; flex-direction:column;}
+  .price-card.featured{background:var(--ink); color:var(--paper); position:relative; transform:scale(1.03); box-shadow:0 30px 50px -20px rgba(31,42,34,0.4);}
+  .price-card.featured .price-card-tag{background:var(--apricot); color:#fff;}
+  .price-card-tag{align-self:flex-start; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; background:var(--paper); padding:5px 12px; border-radius:100px; margin-bottom:18px; font-weight:600;}
+  .price-card h3{font-size:1.3rem; margin-bottom:6px;}
+  .price-card .amount{font-family:'Fraunces',serif; font-size:2.4rem; margin:14px 0;}
+  .price-card .amount span{font-size:1rem; font-weight:400; opacity:0.7;}
+  .price-card ul{list-style:none; display:flex; flex-direction:column; gap:10px; margin:18px 0 26px; font-size:0.9rem;}
+  .price-card ul li::before{content:'✓ '; color:var(--teal); font-weight:700;}
+  .price-card.featured ul li::before{color:var(--gold);}
+  .price-card .cta-btn{text-align:center; margin-top:auto;}
+
+  /* TESTIMONIAL */
+  .testimonial{padding:90px 0; text-align:center;}
+  .testimonial blockquote{font-family:'Fraunces', serif; font-style:italic; font-size:clamp(1.5rem,2.6vw,2.1rem); max-width:760px; margin:0 auto 24px; line-height:1.4;}
+  .testimonial .who{font-weight:600; font-size:0.95rem;}
+  .testimonial .who span{color:var(--teal); font-weight:400;}
+
+  /* FOOTER DARK */
+  .brand-container {
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  line-height: 1;         /* Reduce el espacio entre líneas */
+}
+.carousel-slide{
+  flex: 0 0 auto;
+  width: 100%;
+  scroll-snap-align: start;
+}
+@media (min-width: 640px){.carousel-slide{ width: calc(50% - 0.625rem); } }
+@media (min-width: 1024px){.carousel-slide{ width: calc(33.333% - 0.833rem); } }
+
+.carousel-slide img{
+  width: 100%;
+  height: 16rem;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.15);
+}
+.footer-subtext {
+  font-size: 0.75rem;     /* Tamaño pequeño */
+  color: rgba(241,243,236,0.6); /* Color un poco más suave */
+  letter-spacing: 0.1em;  /* Espaciado para que se vea profesional */
+  text-transform: uppercase;
+  margin-top: 4px;        /* Pequeña separación del título */
+}
+  footer{
+    background: #1F2A22;
+    color: #F1F3EC;
+    margin-top: 0;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 0;
+  }
+  /* FOOTER COMPACTO */
+.footer-main{
+  padding: 40px 0 32px !important;
+  border-bottom: 1px solid rgba(241,243,236,0.1);
+}
+
+.footer-bottom{
+  line-height: 1.2;
+  text-align: center;
+  margin-top: 0;
+  padding: 16px 0 18px !important;
+  border-top: 1px solid rgba(241,243,236,0.12);
+}
+
+.footer-bottom p{
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(241,243,236,0.55);
+}
+  .footer-main .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .footer-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    align-items: start;
+    justify-content: center;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .footer-col h4{
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #F1F3EC;
+  }
+  .footer-logo{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .footer-logo img{
+    height: 100px;
+    width: auto;
+    opacity: 0.9;
+  }
+  .footer-brand{
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .footer-desc{
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(241,243,236,0.75);
+    margin-bottom: 20px;
+  }
+  .footer-social{
+    display: flex;
+    gap: 12px;
+  }
+  .footer-social a{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+  }
+  .footer-social a:first-child{
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  }
+  .footer-social a:last-child{
+    background: #25D366;
+  }
+  .footer-social a:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  }
+  .footer-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .footer-list li{
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: rgba(241,243,236,0.85);
+  }
+  .footer-list i{
+    color: var(--teal);
+    font-size: 1rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .footer-list a{
+    color: rgba(241,243,236,0.85);
+    transition: color 0.2s ease;
+  }
+  .footer-list a:hover{
+    color: var(--apricot);
+  }
+  .footer-location{
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: rgba(241,243,236,0.85);
+    margin-bottom: 16px;
+  }
+  .footer-location i{
+    color: var(--teal);
+    font-size: 1rem;
+    margin-top: 2px;
+  }
+  .footer-map{
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  padding-bottom: 8px;
+  }
+  .footer-map iframe{
+    display: block;
+    filter: grayscale(0.2);
+    
+  }
+  .footer-main .wrap {
+    padding-left: 20px;  /* Añade espacio a la izquierda */
+    padding-right: 20px; /* Añade espacio a la derecha */
+  }
+
+  .footer-col {
+    padding-left: 10px;  /* Ajuste adicional para los textos internos */
+    padding-right: 10px;
+  }
+  .map-btn{
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #fff;
+    color: var(--ink);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.2s ease;
+  }
+  .map-btn:hover{
+    background: var(--teal);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .footer-bottom{
+    padding: 24px 0;
+    text-align: center;
+  }
+  .footer-bottom p{
+    font-size: 0.85rem;
+    color: rgba(241,243,236,0.6);
+    margin: 0;
+  }
+  .float-btn{
+    position: fixed;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+  .float-btn:hover{
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  }
+  .float-whatsapp{
+    background: #25D366;
+    bottom: 24px;
+    right: 24px;
+  }
+  .float-instagram{
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    bottom: 90px;
+    right: 24px;
+  }
+
+  /* ===== MOBILE ÚNICO - SIN DUPLICADOS ===== */
+  @media (max-width: 860px){
+    nav{
+      height: 65px;
+      padding: 8px 16px;
+      position: relative;
+    }
+    
+    .logo img{
+      height: 110px;
+      width: auto;
+    }
+    
+    .logo-text{
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    
+    .main-title{
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .sub-title{
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+    
+    .logo{
+      gap: 6px;
+    }
+    
+    .navlinks{
+      display: none;
+    }
+    
+    .menu-toggle{
+      display: block; 
+      z-index: 100;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--ink);
+      padding: 8px;
+      margin-left: auto;
+    }
+    
+    .navlinks.active{
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 65px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid var(--line);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      padding: 16px 20px 24px;
+      gap: 0;
+      z-index: 99;
+    }
+    
+    .navlinks.active a{
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      width: 100%;
+      font-size: 0.95rem;
+      gap: 12px;
+    }
+    
+    .navlinks.active a i{
+      font-size: 1rem;
+      width: 18px;
+      text-align: center;
+    }
+    
+    .navlinks.active a:last-of-type{
+      border-bottom: none;
+    }
+    
+    .navlinks.active .cta-btn{
+      margin-top: 16px;
+      text-align: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px 32px;
+    }
+    
+    .hero{
+      padding: 90px 0 60px;
+    }
+    
+    .hero .wrap{
+      grid-template-columns: 1fr; 
+      text-align: center;
+    }
+    .hero p.lead{
+      margin: 0 auto 32px;
+    }
+    .hero-ctas{
+      justify-content: center;
+    }
+    .grid-services{
+      grid-template-columns: 1fr;
+    }
+    .grid-pricing{
+      grid-template-columns: 1fr;
+    }
+    .price-card.featured{
+      transform: none;
+    }
+    .transform .wrap{
+      grid-template-columns: 1fr;
+    }
+    .dog-card{
+      max-width: 320px; 
+      margin: 0 auto;
+    }
+    
+    #nosotros .wrap > div {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+    #nosotros [style*="position:absolute"][style*="bottom:-20px"] {
+      position: relative !important;
+      bottom: auto !important;
+      left: auto !important;
+      margin-top: 20px;
+    }
+    
+    #galeria .group-arrows {padding: 0 16px;}
+    #galeria #prevBtn {left: 8px;}
+    #galeria #nextBtn {right: 8px;}
+    #galeria #prevBtn, #galeria #nextBtn {
+      width: 40px; height: 40px; background: rgba(255,255,255,0.95);
+    }
+    .footer-bottom p{
+    font-size: 0.7rem !important;
+    white-space: nowrap; /* fuerza una sola línea */
+   }
+    .footer-grid{
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    
+    .footer-main{
+      padding: 48px 0 32px;
+    }
+    
+    .footer-map iframe{
+      height: 200px;
+    }
+    
+    .float-whatsapp{
+      bottom: 20px;
+      right: 16px;
+      width: 52px;
+      height: 52px;
+    }
+    
+    .float-instagram{
+      bottom: 82px;
+      right: 16px;
+      width: 52px;
+      height: 52px;
+    }
+  }
+.policy-box { padding: 40px; background: #ffffff; border-radius: 20px; border: 1px solid #ececec; }
+.policy-title { margin-bottom: 40px; text-align: center; font-family: 'Fraunces', serif; }
+
+.policy-grid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas en escritorio */
+  gap: 30px; 
+}
+
+.policy-item { display: flex; gap: 15px; align-items: flex-start; }
+.policy-item p { font-size: 0.9rem; color: #666; margin-top: 5px; }
+
+.alert-box { 
+  margin-top: 30px; padding: 20px; background: #fff5f5; 
+  border: 1px solid #fed7d7; border-radius: 10px; 
+  color: #c53030; text-align: center; 
+}
+
+/* AQUÍ ESTÁ LA MAGIA PARA RESPONSIVE */
+@media (max-width: 768px) {
+  .policy-grid { 
+    grid-template-columns: 1fr; /* 1 sola columna en móvil */
+    gap: 20px; 
+  }
+  .policy-box { padding: 20px; }
+}
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track, .logo .tail{animation:none;}
+  }
+@media (max-width: 600px) {
+  .policy-wrapper {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .policy-box {
+    padding: 20px !important; /* Menos espacio interno en móvil */
+  }
+ }
+  :focus-visible{outline:3px solid var(--teal); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <a href="#inicio" class="logo" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
+  <img src="img/logo4.webp" alt="Colotas Dog Barber" style="height:100px;">
+  <div style="display:flex; flex-direction:column; line-height:1;">
+    <span class="main-title">COLOTAS</span>
+    <span class="sub-title">PELUQUERÍA CANINA</span>
+  </div>
+</a>
+    </div>
+    <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+    <div class="navlinks">
+      <a href="#servicios">
+        <i class="fas fa-cut"></i> Servicios
+      </a>
+      <a href="#galeria">
+        <i class="fas fa-images"></i> Galería
+      </a>
+      <a href="#precios">
+        <i class="fas fa-tags"></i> Precios
+      </a>
+      <a href="#nosotros">
+        <i class="fas fa-paw"></i> Nosotros
+      </a>
+      <a href="#reservar" class="cta-btn">
+        <i class="fas fa-calendar-check"></i> Reservar turno
+      </a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="paws"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">peluquería canina </span>
+      <h1>Cada <em>colita</em><br>merece brillar.</h1>
+      <p class="lead">Baño, corte y spa pensados para el ritmo de tu perro: sin apuros, sin estrés, con productos suaves y mucha paciencia.</p>
+      <div class="hero-ctas">
+        <a href="#reservar" class="btn-primary">Reservar turno</a>
+        <a href="#servicios" class="btn-ghost">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+  <div class="dog-card">
+    <div class="badge-float">
+      <span class="dot"></span> Consultanos los turnos disponibles
+    </div>
+    <div class="dog">
+      <img src="img/imagen1.webp" alt="Perro feliz después del baño">
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>🐾 Baño con productos hipoalergénicos</span>
+    <span>🐾 Corte por raza y estilo</span>
+    <span>🐾 Spa de patitas</span>
+    <span>🐾 Atención sin jaulas de espera</span>
+    <span>🐾 Baño con productos hipoalergénicos</span>
+    <span>🐾 Corte por raza y estilo</span>
+    <span>🐾 Spa de patitas</span>
+    <span>🐾 Atención sin jaulas de espera</span>
+  </div>
+</div>
+
+<section class="services" id="servicios">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Nuestros servicios</span>
+      <h2>Todo lo que necesita su colita, en un mismo lugar.</h2>
+      <p class="subtitle">Todos nuestros servicios incluyen: corte higiénico, retoques de cara, uñas, oídos y glándulas.</p>
+    </div>
+
+    <div class="grid-services">
+  <!-- Tarjeta 1: Baño y secado -->
+  <div class="service-card">
+    <div class="service-icon">
+      <img src="img/baño.webp" alt="Icono Baño" style="width: 80px; height: 80px; object-fit: contain;">
+    </div>
+    <h3>Baño y secado</h3>
+    <p>Utilizamos champú específico según el tipo de pelaje de para cuidar su piel y 
+      brillo natural. Finalizamos con cepillado y secado con aire tibio, garantizando 
+      una experiencia libre de estrés.</p>
+    <span class="price">Consultar</span>
+  </div>
+  
+  <!-- Tarjeta 2: Corte y deslanado -->
+  <div class="service-card">
+    <div class="service-icon">
+      <img src="img/corte.webp" alt="Icono Corte" style="width: 80px; height: 80px; object-fit: contain;">
+    </div>
+    <h3>Corte y deslanado</h3>
+    <p>Servicio de peluquería profesional a tijera o máquina. Adaptamos el corte según 
+      el estándar de raza o el estilo personalizado que tú elijas.</p>
+    <span class="price">Consultar</span>
+  </div>
+  
+  <!-- Tarjeta 3: Spa de patitas -->
+  <div class="service-card">
+    <div class="service-icon">
+      <img src="img/spa.webp" alt="Icono Spa" style="width: 80px; height: 80px; object-fit: contain;">
+    </div>
+    <h3>Spa de patitas</h3>
+    <p>Ofrecemos servicio de corte y limado de uñas para tu peludito. Un procedimiento 
+      rápido, seguro y libre de estrés para que camine siempre cómodo y feliz..</p>
+    <span class="price">Consultar</span>
+  </div>
+</div>
+
+ <!-- Políticas de Atención -->
+<div class="wrap policy-wrapper" style="margin-top: 60px;">
+  <div class="policy-box">
+    <h3 class="policy-title">Información importante</h3>
+    
+    <div class="policy-grid">
+      <div class="policy-item">
+        <span>🐾</span>
+        <div><strong>Salud y Bienestar</strong><p>Sin pulgas ni garrapatas. Por favor, aplica un antiparasitario una semana antes del turno.</p></div>
+      </div>
+      
+      <div class="policy-item">
+        <span>⏰</span>
+        <div><strong>Puntualidad</strong><p>Tolerancia máxima de 10 min. Pasado este tiempo, el turno se cancela y se pierde la seña.</p></div>
+      </div>
+      
+      <div class="policy-item">
+        <span>📦</span>
+        <div><strong>Logística</strong><p>No contamos con traslado. Trae a tu mascota puntual y te avisaremos al finalizar.</p></div>
+      </div>
+    </div> 
+
+    <div class="alert-box">
+      ⚠️ <strong>IMPORTANTE:<br></strong> Los servicios pueden tener recargos adicionales en casos de nudos excesivos, presencia de pulgas o garrapatas.
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Galería Drive -->
+
+<section id="galeria">
+
+ <div class="wrap">
+  <div style="margin-bottom:2.5rem; text-align:center;">
+    <p class="eyebrow" style="color:var(--apricot);">Colitas Felices</p>
+    <h2 style="font-size:clamp(2.1rem,3.6vw,2.8rem); margin-bottom:0.6rem;">Nuestra historia con ellos</h2>
+    <p style="font-size:1.05rem; color:#54604f; max-width:520px; margin:0 auto; line-height:1.5;">
+      Cada foto es un mimo, una siesta después del baño y un peinado con mucho amor.
+    </p>
+  </div>
+</div>
+
+  <div class="group-arrows">
+    <button id="prevBtn" aria-label="Anterior">
+  <i class="fas fa-paw"></i>
+</button>
+<button id="nextBtn" aria-label="Siguiente">
+  <i class="fas fa-paw"></i>
+</button>
+
+    <div id="carousel" class="scrollbar-hide">
+      <div id="drive-carousel-loading" style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:16rem;">
+        <div style="border:4px solid #f3f3f3; border-top:4px solid var(--teal); border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite; margin-bottom:16px;"></div>
+        <p style="font-size:0.9rem; color:#666;">Cargando fotos...</p>
+      </div>
+      
+      <div id="instagram-card" class="carousel-slide" style="background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); display:flex !important; flex-direction:column; justify-content:center; align-items:center; border-radius:1rem; padding:1.5rem; text-align:center; color:white; height:16rem; min-height:16rem; box-shadow: 0 8px 20px -6px rgba(0,0,0,0.15); border: 3px solid #fff;">
+        <i class="fab fa-instagram" style="font-size:3.5rem; margin-bottom:1rem;"></i>
+        <h3 style="font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">¡Seguinos en las redes!</h3>
+        <p style="font-size:0.9rem; opacity:0.95; margin-bottom:1.2rem; max-width:280px;">
+          y entérate de todas las novedades
+        </p>
+        <a href="https://www.instagram.com/peluqueriacaninacolotas" target="_blank" rel="noopener" style="background:#fff; color:#8a2e8e; padding:10px 22px; border-radius:100px; font-weight:700; font-size:0.85rem; display:inline-flex; align-items:center; gap:6px;">
+          @Colotas_ <i class="fas fa-external-link-alt" style="font-size:0.7rem;"></i>
+        </a>
+      </div>
+    </div>
+
+    <div id="indicators" style="display:flex; justify-content:center; gap:8px; margin-top:24px;"></div>
+  </div>
+
+  <!-- TEXTO FINAL -->
+  <div class="wrap">
+    <div style="text-align:center; margin-top:40px;">
+      <p style="font-size:1.05rem; font-weight:500; color:var(--ink); display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; line-height:1.4;">
+        📸 ¡Mirá más contenido! 
+        <a href="https://www.instagram.com/peluqueriacaninacolotas" target="_blank" rel="noopener" style="color:var(--teal); font-weight:700; text-decoration:underline; text-underline-offset:4px;">
+          ¡Seguinos en Instagram y enterate de todas nuestras novedades al instante!
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="precios" style="padding: 60px 0; font-family: 'Georgia', serif;">
+  <div class="wrap" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+    
+    <div class="section-head" style="text-align: center; margin-bottom: 40px;">
+      <span class="eyebrow" style="text-transform: lowercase; font-style: italic; letter-spacing: 0.5px; color: #1e4d8b; display: block; margin-bottom: 5px;">planes</span>
+      <h2 style="font-size: 2.8rem; color: #2d3436; margin: 0; line-height: 1.2;">Un plan para cada colita.</h2>
+    </div>
+
+    <!-- Contenedor de tarjetas -->
+    <div class="grid-pricing" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch;">
+      
+      <!-- Tarjeta 1 -->
+      <div class="price-card" style="flex: 1; min-width: 300px; border: 1px solid #eee; padding: 30px; border-radius: 15px; background: #fff; display: flex; flex-direction: column;">
+        <span class="price-card-tag" style="font-family: sans-serif; text-transform: uppercase; font-size: 0.8rem; color: #666;">Pequeños</span>
+        <h3 style="font-family: 'Georgia', serif;">Baño express</h3>
+        <div class="amount" style="font-size: 1.5rem; font-weight: bold; margin: 10px 0;">$18.000 <span style="font-size: 0.9rem; font-weight: normal;">desde</span></div>
+        
+        <p style="margin: 10px 0 5px 0; font-weight: bold; font-size: 0.9rem;">Incluye:</p>
+        <ul style="list-style: none; padding: 0; flex-grow: 1;">
+          <li> Baño Bella o Pulguicida</li>
+          <li> Retoques cara y patitas</li>
+          <li> Oídos y Uñas</li>
+          <li> Secado</li>
+        </ul>
+        <a href="#reservar" class="cta-btn" style="display: block; text-align: center; margin-top: 20px; padding: 12px; background: #1e4d8b; color: #fff; border-radius: 8px; text-decoration: none;">Elegir</a>
+      </div>
+
+      <!-- Tarjeta 2 (Más elegido) corregida -->
+<div class="price-card featured" style="flex: 1; min-width: 300px; border: 2px solid #5a8982; padding: 30px; border-radius: 15px; background: #fff; display: flex; flex-direction: column;">
+ 
+  <span class="price-card-tag" style="font-family: sans-serif; text-transform: uppercase; font-size: 0.75rem; font-weight: bold; color: #fff; background-color: #5a8982; padding: 5px 12px; border-radius: 20px; align-self: flex-start; margin-bottom: 15px;">
+    Más elegido
+  </span>
+  
+  <h3 style="color: #333; font-family: 'Georgia', serif;">Look completo Can Pequeño</h3>
+  <div class="amount" style="color: #333; font-weight: bold; font-size: 1.5rem; margin: 10px 0;">
+    $25.000 <span style="font-size: 0.9rem; font-weight: normal;">desde</span>
+  </div>
+  
+  <!-- AQUÍ ESTÁ EL CAMBIO DE COLOR (color: #333) -->
+  <p style="margin: 10px 0 5px 0; font-weight: bold; font-size: 0.9rem; color: #333;">Incluye:</p>
+  
+  <ul style="list-style: none; padding: 0; color: #333; flex-grow: 1;">
+    <li> Baño + Corte a elección</li>
+    <li> Belleza, Pulguicida</li>
+    <li> Corte de uñas</li>
+    <li> Higiene de oídos</li>
+    <li> Secado</li>
+    <li> Moño o Pañuelo de regalo</li>
+  </ul>
+  
+  <a href="#reservar" class="cta-btn" style="display: block; text-align: center; margin-top: 20px; padding: 12px; background: #5a8982; color: #fff; border-radius: 8px; text-decoration: none; font-weight: bold;">
+    Elegir
+  </a>
+</div>
+
+      <!-- Tarjeta 3 -->
+      <div class="price-card" style="flex: 1; min-width: 300px; border: 1px solid #eee; padding: 30px; border-radius: 15px; background: #fff; display: flex; flex-direction: column;">
+        <span class="price-card-tag" style="font-family: sans-serif; text-transform: uppercase; font-size: 0.8rem; color: #666;">Medianos y grandes</span>
+        <div style="flex-grow: 1;">
+          <h3 style="margin-bottom: 5px; font-family: 'Georgia', serif;">Baño Canes medianos</h3>
+          <div class="amount" style="font-weight: bold; margin-bottom: 15px;">$20.000 <span>desde</span></div>
+          <h3 style="margin-top: 20px; margin-bottom: 5px; font-family: 'Georgia', serif;">Baño Canes Grandes</h3>
+          <div class="amount" style="font-weight: bold; margin-bottom: 15px;">$36.000 <span>desde</span></div>
+          
+          <p style="margin: 10px 0 5px 0; font-weight: bold; font-size: 0.9rem;">Incluye:</p>
+          <ul style="list-style: none; padding: 0;">
+            <li> Baño</li>
+            <li> Corte de uñas</li>
+            <li> Secado</li>
+          </ul>
+        </div>
+        <a href="#reservar" class="cta-btn" style="display: block; text-align: center; margin-top: 20px; padding: 12px; background: #1e4d8b; color: #fff; border-radius: 8px; text-decoration: none;">Elegir</a>
+      </div>
+    </div>
+    
+   <!-- Aviso legal -->
+<div style="margin-top: 50px; padding: 25px; background: #fdfaf0; border: 1px solid #ffc107; border-radius: 10px; text-align: center;">
+  <p style="margin: 0; font-size: 1rem; color: #444; line-height: 1.5; font-family: sans-serif;">
+    ⚠️ <strong>IMPORTANTE: <br></strong> Los valores expresados pueden sufrir modificaciones sin previo aviso. 
+    Consultanos por 
+    <a href="https://wa.me/5491168959253" target="_blank" style="color: #25d366; font-weight: bold; text-decoration: underline;">WhatsApp</a> 
+    antes de realizar tu reserva.
+  </p>
+</div>
+  </div>
+</section>
+
+<section id="nosotros" class="py-16 md:py-24 background-nubes" style="border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="wrap">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      
+      <!-- Columna texto -->
+      <div>
+        <p class="eyebrow" style="color:var(--teal);">Quiénes somos</p>
+        <h2 style="font-size:clamp(2.1rem,3.6vw,2.8rem); margin-bottom:1.5rem;">Más que una peluquería, una familia</h2>
+        
+        <p style="font-size:1.05rem; line-height:1.7; color:#41503f; margin-bottom:1.25rem;">
+          En <strong style="color:var(--ink);">Dog Barber Colotas</strong> creemos que cada mascota merece sentirse especial. Desde 2015 nos
+           dedicamos con amor y profesionalismo al cuidado estético de caninos en Isidro Casanova.
+        </p>
+        
+        <p style="font-size:1.05rem; line-height:1.7; color:#41503f; margin-bottom:2rem;">
+          Cuidamos la estética e higiene de tu mascota con el mismo amor que vos.
+         Sabemos que detrás de cada colita que se mueve hay una familia que confía en nosotros.
+          Por eso trabajamos sin sedantes, con paciencia infinita y solo productos hipoalergénicos.
+        </p>
+
+        <!-- Valores en badges -->
+        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:2rem;">
+          <div style="display:flex; align-items:center; gap:8px; background:var(--paper); padding:10px 16px; border-radius:100px; border:1px solid var(--line);">
+            <i class="fas fa-heart" style="color:var(--apricot);"></i>
+            <span style="font-size:0.9rem; font-weight:500;">Amor por los animales</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; background:var(--paper); padding:10px 16px; border-radius:100px; border:1px solid var(--line);">
+            <i class="fas fa-certificate" style="color:var(--teal);"></i>
+            <span style="font-size:0.9rem; font-weight:500;">Profesionales certificados</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; background:var(--paper); padding:10px 16px; border-radius:100px; border:1px solid var(--line);">
+            <i class="fas fa-leaf" style="color:var(--teal);"></i>
+            <span style="font-size:0.9rem; font-weight:500;">Productos naturales</span>
+          </div>
+        </div>
+
+        <a href="#reservar" class="btn-primary" style="display:inline-block;">Reservá tu turno</a>
+      </div>
+
+      <!-- Columna imagen/stats -->
+      <div style="position:relative;">
+        <!-- Imagen principal -->
+        <div style="border-radius:28px; overflow:hidden; box-shadow:0 30px 60px -20px rgba(31,42,34,0.35); aspect-ratio:4/5; background:linear-gradient(160deg, #DCE9DE 0%, #C7DFCB 100%); display:flex; align-items:center; justify-content:center;">
+          <img src="img/nosotros.webp" alt="Equipo Colotas Pelu" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        
+        <!-- Card flotante con stats -->
+        <div style="position:absolute; bottom:-20px; left:-20px; background:#fff; border-radius:20px; padding:24px 28px; box-shadow:0 20px 40px rgba(0,0,0,0.12); border:1px solid var(--line);">
+          <div style="display:flex; gap:32px;">
+            <div style="text-align:center;">
+              <div style="font-family:'Fraunces',serif; font-size:2rem; font-weight:700; color:var(--apricot); line-height:1;">+500</div>
+              <div style="font-size:0.8rem; color:#54604f; margin-top:4px;">Clientes felices</div>
+            </div>
+            <div style="width:1px; background:var(--line);"></div>
+            <div style="text-align:center;">
+              <div style="font-family:'Fraunces',serif; font-size:2rem; font-weight:700; color:var(--teal); line-height:1;">+11</div>
+              <div style="font-size:0.8rem; color:#54604f; margin-top:4px;">Años juntos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="reservar" style="padding: 90px 0; background: #f0f8ff;">
+  <div class="wrap" style="max-width: 420px; margin: 0 auto; background: white; padding: 32px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+    
+    <div style="text-align: center; margin-bottom: 8px;">
+  <img src="img/pata.webp" alt="Logo" style="width: 64px; height: 64px; margin-bottom: 8px;">
+  <h2 style="margin: 0; font-size: 28px; color: #1e4d8b; font-family: system-ui, -apple-system, sans-serif;">Reservá tu turno</h2>
+  <p style="margin: 8px 0 0; color: #666; font-size: 14px; font-family: system-ui;">Completa los datos y te contactamos por WhatsApp</p>
+</div>
+
+    <form id="formReserva" style="display: flex; flex-direction: column; gap: 18px; margin-top: 24px;">
+      
+      <div>
+        <label for="nombre" style="display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: #1e4d8b; font-family: system-ui;">NOMBRE DE TU MASCOTA</label>
+        <div style="position: relative;">
+          <img src="img/huella.webp" alt="Nombre" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;">
+          <input type="text" id="nombre" placeholder="Ej: Luna, Max, Rocky" required 
+                 style="width: 100%; box-sizing: border-box; padding: 12px 12px 12px 44px; border: 1px solid #ddd; border-radius: 10px; font-size: 15px; font-family: system-ui; transition: border 0.2s;"
+                 onfocus="this.style.borderColor='#1e4d8b'" onblur="this.style.borderColor='#ddd'">
+        </div>
+      </div>
+
+      <div>
+        <label for="raza" style="display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: #1e4d8b; font-family: system-ui;">RAZA</label>
+        <div style="position: relative;">
+          <img src="img/raza.webp" alt="Raza" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;">
+          <input type="text" id="raza" placeholder="Ej: Caniche, Golden, Mestizo" required 
+                 style="width: 100%; box-sizing: border-box; padding: 12px 12px 12px 44px; border: 1px solid #ddd; border-radius: 10px; font-size: 15px; font-family: system-ui; transition: border 0.2s;"
+                 onfocus="this.style.borderColor='#1e4d8b'" onblur="this.style.borderColor='#ddd'">
+        </div>
+      </div>
+
+      <!-- NUEVO CAMPO: PESO APROXIMADO -->
+      <div>
+        <label for="peso" style="display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: #1e4d8b; font-family: system-ui;">PESO APROXIMADO (kg)</label>
+        <div style="position: relative;">
+          <img src="img/peso.webp" alt="peso" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;">
+          <input type="number" id="peso" placeholder="Ej: 5, 12, 20" required 
+                 style="width: 100%; box-sizing: border-box; padding: 12px 12px 12px 44px;; border: 1px solid #ddd; border-radius: 10px; font-size: 15px; font-family: system-ui; transition: border 0.2s;"
+                 onfocus="this.style.borderColor='#1e4d8b'" onblur="this.style.borderColor='#ddd'">
+        </div>
+      </div>
+
+      <div>
+        <label for="fecha" style="display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: #1e4d8b; font-family: system-ui;">FECHA DEL TURNO</label>
+        <div style="position: relative;">
+          <img src="img/fecha.webp" alt="Fecha" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;">
+          <input type="date" id="fecha" required 
+                 style="width: 100%; box-sizing: border-box; padding: 12px 12px 12px 44px; border: 1px solid #ddd; border-radius: 10px; font-size: 15px; font-family: system-ui; transition: border 0.2s;"
+                 onfocus="this.style.borderColor='#1e4d8b'" onblur="this.style.borderColor='#ddd'">
+        </div>
+      </div>
+
+      <div>
+        <label for="comentario" style="display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: #1e4d8b; font-family: system-ui;">COMENTARIOS ADICIONALES</label>
+        <div style="position: relative;">
+          <img src="img/charlar.webp" alt="Comentarios" style="position: absolute; left: 12px; top: 16px; width: 20px; height: 20px;">
+          <textarea id="comentario" placeholder="Estado del pelaje, tiene pulgas o garrapatas, etc." rows="3" 
+                    style="width: 100%; box-sizing: border-box; padding: 12px 12px 12px 44px; border: 1px solid #ddd; border-radius: 10px; font-size: 15px; font-family: system-ui; resize: vertical; transition: border 0.2s;"
+                    onfocus="this.style.borderColor='#1e4d8b'" onblur="this.style.borderColor='#ddd'"></textarea>
+        </div>
+      </div>
+
+      <div style="margin: 15px 0;">
+        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: #666; cursor: pointer;">
+          <input type="checkbox" id="aceptoPoliticas" required style="margin-top: 3px;">
+          <span>He leído y acepto las políticas de atención (salud, puntualidad y logística).</span>
+        </label>
+      </div>
+      
+      <button type="submit" 
+              style="background: #25D366; color: white; padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px; font-family: system-ui; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s, transform 0.1s; margin-top: 8px;"
+              onmouseover="this.style.background='#20ba5a'" 
+              onmouseout="this.style.background='#25D366'"
+              onmousedown="this.style.transform='scale(0.98)'"
+              onmouseup="this.style.transform='scale(1)'">
+        <img src="img/whatsapp.webp" alt="WhatsApp" style="width: 20px; height: 20px;">
+        Enviar a WhatsApp
+      </button>
+      
+      <p style="text-align: center; margin: 4px 0 0; font-size: 13px; color: #25D366; font-family: system-ui;">
+        ✓ Respuesta rápida en WhatsApp &nbsp; • &nbsp; 100% seguro
+      </p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-main">
+    <div class="wrap">
+      <div class="footer-grid">
+        <!-- Columna 1: Marca -->
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="img/logofooter.webp" alt="Colotas">
+            <div class="brand-container">
+              <span class="footer-brand">COLOTAS</span>
+              <span class="footer-subtext">Peluquería Canina</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Peluquería canina Isidro Casanova. Cuidado estético e higiénico para tu mascota.
+          </p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/peluqueriacaninacolotas" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/5491168959253" target="_blank" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+      <!-- Columna 2: Contacto -->
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul class="footer-list">
+          <li>
+            <i class="fas fa-phone"></i>
+            <a href="tel:+5491134567890">11-6895-9253</a>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:hola@colotas.com">hola@colotas.com</a>
+          </li>
+          <li>
+            <i class="fas fa-clock"></i>
+            Lun a Vie: por la mañana.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Ubicación -->
+      <div class="footer-col">
+        <h4>Ubicación</h4>
+        <div class="footer-location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Balbastro 5484, Isidro Casanova</span>
+        </div>
+        <div class="footer-map">
+        <iframe 
+  src="https://www.google.com/maps?q=Balbastro%205484%2C%20Isidro%20Casanova%2C%20Buenos%20Aires&z=16&output=embed"
+  width="100%" 
+  height="180" 
+  style="border:0; border-radius:12px;" 
+  allowfullscreen="" 
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+          <a href="https://maps.google.com/?q=Balbastro+5484,+Isidro+Casanova" target="_blank" class="map-btn">
+    Abrir en Maps <i class="fas fa-external-link-alt"></i>
+</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-bottom">
+  <div class="wrap">
+    <p>© 2026 Dog Barber Colotas | Todos los derechos reservados</p>
+  </div>
+</div>
+
+  <!-- Botones flotantes -->
+  <a href="https://wa.me/5491168959253" class="float-btn float-whatsapp" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <a href="https://www.instagram.com/peluqueriacaninacolotas" class="float-btn float-instagram" target="_blank" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+</footer>
+
+<script>
+  // 1. MENU TOGGLE
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navlinks = document.querySelector('.navlinks');
+
+  menuToggle?.addEventListener('click', function() {
+    navlinks.classList.toggle('active');
+    this.textContent = navlinks.classList.contains('active') ? '✕' : '☰';
+  });
+
+  navlinks?.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A' || e.target.closest('button')) {
+      navlinks.classList.remove('active');
+      menuToggle.textContent = '☰';
+    }
+  });
+
+  // 2. SLIDER COMPARADOR
+  const slider = document.getElementById('slider');
+  const afterPane = document.getElementById('afterPane');
+  const handle = document.getElementById('handle');
+  slider?.addEventListener('input', (e) => {
+    const val = e.target.value;
+    afterPane.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+    handle.style.left = val + '%';
+  });
+
+// 3. CARRUSEL DRIVE SCRIPT JS
+// Usa la URL que te dio Google Apps Script al publicar
+const URL_DEL_JSON = "https://script.google.com/macros/s/AKfycbxav62McdBn-2b6J7yKRQrSwYCzzUc1RG06w0oNzT8gRsSdEotKp9pbQ_pqeAbBKWsP/exec"; 
+
+async function cargarFotosDrive() {
+  const carousel = document.getElementById('carousel');
+  const loadingEl = document.getElementById('drive-carousel-loading');
+  const instagramCard = document.getElementById('instagram-card');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const indicatorsContainer = document.getElementById('indicators');
+
+  if (!carousel) return;
+
+  try {
+    // Ahora hacemos fetch al JSON que genera tu Script
+    const response = await fetch(URL_DEL_JSON);
+    if (!response.ok) throw new Error('Error al conectar con la fuente de imágenes');
+    const data = await response.json(); // Data es una lista: [{name, url}, ...]
+    
+    if (loadingEl) loadingEl.remove();
+
+    if (!data || data.length === 0) {
+      carousel.innerHTML = "<p style='text-align:center; width:100%;'>No hay fotos para mostrar</p>";
+      return;
+    }
+
+    data.forEach((file) => {
+      const slideDiv = document.createElement('div');
+      slideDiv.className = "carousel-slide";
+      const img = document.createElement('img');
+      // Usamos directamente la URL que nos devuelve el script
+      img.src = file.url; 
+      img.alt = file.name;
+      img.loading = "lazy";
+      slideDiv.appendChild(img);
+      carousel.insertBefore(slideDiv, instagramCard);
+    });
+
+  
+      // ---- LÓGICA DE MOVIMIENTO ----
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      const allSlides = carousel.children;
+      let currentIndex = 0;
+
+      function getVisibleSlides() {
+        if (window.innerWidth < 640) return 1;
+        if (window.innerWidth < 1024) return 2;
+        return 3;
+      }
+
+      function updateCarousel() {
+        const slideWidth = allSlides[0].offsetWidth + 20; // 20 es el gap
+        carousel.scrollTo({
+          left: currentIndex * slideWidth,
+          behavior: 'smooth'
+        });
+        updateIndicators();
+      }
+
+      function updateIndicators() {
+        if (!indicatorsContainer) return;
+        indicatorsContainer.innerHTML = '';
+        const totalDots = Math.max(1, allSlides.length - getVisibleSlides() + 1);
+        for (let i = 0; i < totalDots; i++) {
+          const dot = document.createElement('button');
+          dot.className = `indicator-dot ${i === currentIndex? 'active' : ''}`;
+          dot.addEventListener('click', () => {
+            currentIndex = i;
+            updateCarousel();
+          });
+          indicatorsContainer.appendChild(dot);
+        }
+      }
+
+      nextBtn?.addEventListener('click', () => {
+        const maxIndex = allSlides.length - getVisibleSlides();
+        currentIndex = currentIndex >= maxIndex? 0 : currentIndex + 1;
+        updateCarousel();
+      });
+
+      prevBtn?.addEventListener('click', () => {
+        const maxIndex = allSlides.length - getVisibleSlides();
+        currentIndex = currentIndex <= 0? maxIndex : currentIndex - 1;
+        updateCarousel();
+      });
+
+      // Swipe en mobile
+      let startX = 0;
+      carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+      carousel.addEventListener('touchend', e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) nextBtn.click();
+          else prevBtn.click();
+        }
+      });
+
+      updateIndicators();
+      window.addEventListener('resize', updateCarousel);
+
+    } catch (error) {
+      console.error("Error al cargar Drive:", error);
+      if (loadingEl) loadingEl.innerHTML = "<p style='color:red;'>No se pudieron cargar las fotos</p>";
+    }
+  }
+  
+  // 4. FORMULARIO RESERVA
+  document.getElementById('formReserva')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Validación checkbox
+    const acepto = document.getElementById('aceptoPoliticas')?.checked;
+    if (!acepto) {
+      alert("Debes aceptar las políticas de atención para continuar.");
+      return;
+    }
+
+    // Envío WhatsApp
+    const nombre = document.getElementById('nombre').value;
+const raza = document.getElementById('raza').value;
+const peso = document.getElementById('peso')?.value || 'No especificado';
+const fecha = document.getElementById('fecha').value;
+const comentario = document.getElementById('comentario').value;
+const numeroWhatsApp = "5491168959253";
+const mensaje = `Hola, quiero reservar un turno:%0A%0A*Mascota:* ${nombre}%0A*Raza:* ${raza}%0A*Peso:* ${peso} kg%0A*Fecha:* ${fecha}%0A*Comentario:* ${comentario}`;
+window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+  });
+
+  // EJECUCIÓN INICIAL
+  document.addEventListener('DOMContentLoaded', cargarFotosDrive);
+</script>
+</body>
+</html>
