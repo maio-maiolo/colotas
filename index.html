@@ -1383,7 +1383,6 @@
     <i class="fab fa-instagram"></i>
   </a>
 </footer>
-
 <script>
   // 1. MENU TOGGLE
   const menuToggle = document.querySelector('.menu-toggle');
@@ -1397,7 +1396,7 @@
   navlinks?.addEventListener('click', function(e) {
     if (e.target.tagName === 'A' || e.target.closest('button')) {
       navlinks.classList.remove('active');
-      menuToggle.textContent = '☰';
+      if(menuToggle) menuToggle.textContent = '☰';
     }
   });
 
@@ -1405,54 +1404,56 @@
   const slider = document.getElementById('slider');
   const afterPane = document.getElementById('afterPane');
   const handle = document.getElementById('handle');
+  
   slider?.addEventListener('input', (e) => {
     const val = e.target.value;
-    afterPane.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-    handle.style.left = val + '%';
+    if(afterPane) afterPane.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+    if(handle) handle.style.left = val + '%';
   });
 
-// 3. CARRUSEL DRIVE SCRIPT JS
-// Usa la URL que te dio Google Apps Script al publicar
-const URL_DEL_JSON = "https://script.google.com/macros/s/AKfycbzVlIqf3IgMYr647BZEz27tSgfYijzIpefk7bkmALPmPJe778w2WLuugw9IB8xEZmTL/exec"; 
+  // 3. CARRUSEL DRIVE SCRIPT JS
+  const URL_DEL_JSON = "https://script.google.com/macros/s/AKfycbzVlIqf3IgMYr647BZEz27tSgfYijzIpefk7bkmALPmPJe778w2WLuugw9IB8xEZmTL/exec"; 
+  const URL_PROXY = "https://corsproxy.io/?"; 
 
-async function cargarFotosDrive() {
-  const carousel = document.getElementById('carousel');
-  const loadingEl = document.getElementById('drive-carousel-loading');
-  const instagramCard = document.getElementById('instagram-card');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const indicatorsContainer = document.getElementById('indicators');
+  async function cargarFotosDrive() {
+    const carousel = document.getElementById('carousel');
+    const loadingEl = document.getElementById('drive-carousel-loading');
+    const instagramCard = document.getElementById('instagram-card');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicatorsContainer = document.getElementById('indicators');
 
-  if (!carousel) return;
+    if (!carousel) return;
 
-  try {
-    // Ahora hacemos fetch al JSON que genera tu Script
-    const response = await fetch(URL_DEL_JSON);
-    if (!response.ok) throw new Error('Error al conectar con la fuente de imágenes');
-    const data = await response.json(); // Data es una lista: [{name, url}, ...]
-    
-    if (loadingEl) loadingEl.remove();
+    try {
+      const response = await fetch(URL_PROXY + encodeURIComponent(URL_DEL_JSON), {
+        method: 'GET',
+        mode: 'cors',
+        redirect: 'follow'
+      });
 
-    if (!data || data.length === 0) {
-      carousel.innerHTML = "<p style='text-align:center; width:100%;'>No hay fotos para mostrar</p>";
-      return;
-    }
+      if (!response.ok) throw new Error('Error al conectar con la fuente');
+      const data = await response.json(); 
+      
+      if (loadingEl) loadingEl.remove();
 
-    data.forEach((file) => {
-      const slideDiv = document.createElement('div');
-      slideDiv.className = "carousel-slide";
-      const img = document.createElement('img');
-      // Usamos directamente la URL que nos devuelve el script
-      img.src = file.url; 
-      img.alt = file.name;
-      img.loading = "lazy";
-      slideDiv.appendChild(img);
-      carousel.insertBefore(slideDiv, instagramCard);
-    });
+      if (!data || data.length === 0) {
+        carousel.innerHTML = "<p style='text-align:center; width:100%;'>No hay fotos</p>";
+        return;
+      }
 
-  
-      // ---- LÓGICA DE MOVIMIENTO ----
-      const slides = carousel.querySelectorAll('.carousel-slide');
+      data.forEach((file) => {
+        const slideDiv = document.createElement('div');
+        slideDiv.className = "carousel-slide";
+        const img = document.createElement('img');
+        img.src = file.url; 
+        img.alt = file.name;
+        img.loading = "lazy";
+        slideDiv.appendChild(img);
+        carousel.insertBefore(slideDiv, instagramCard);
+      });
+
+      // LÓGICA DE MOVIMIENTO
       const allSlides = carousel.children;
       let currentIndex = 0;
 
@@ -1463,11 +1464,9 @@ async function cargarFotosDrive() {
       }
 
       function updateCarousel() {
-        const slideWidth = allSlides[0].offsetWidth + 20; // 20 es el gap
-        carousel.scrollTo({
-          left: currentIndex * slideWidth,
-          behavior: 'smooth'
-        });
+        if (allSlides.length === 0) return;
+        const slideWidth = allSlides[0].offsetWidth + 20; 
+        carousel.scrollTo({ left: currentIndex * slideWidth, behavior: 'smooth' });
         updateIndicators();
       }
 
@@ -1477,70 +1476,52 @@ async function cargarFotosDrive() {
         const totalDots = Math.max(1, allSlides.length - getVisibleSlides() + 1);
         for (let i = 0; i < totalDots; i++) {
           const dot = document.createElement('button');
-          dot.className = `indicator-dot ${i === currentIndex? 'active' : ''}`;
-          dot.addEventListener('click', () => {
-            currentIndex = i;
-            updateCarousel();
-          });
+          dot.className = `indicator-dot ${i === currentIndex ? 'active' : ''}`;
+          dot.onclick = () => { currentIndex = i; updateCarousel(); };
           indicatorsContainer.appendChild(dot);
         }
       }
 
       nextBtn?.addEventListener('click', () => {
-        const maxIndex = allSlides.length - getVisibleSlides();
-        currentIndex = currentIndex >= maxIndex? 0 : currentIndex + 1;
+        currentIndex = currentIndex >= (allSlides.length - getVisibleSlides()) ? 0 : currentIndex + 1;
         updateCarousel();
       });
 
       prevBtn?.addEventListener('click', () => {
-        const maxIndex = allSlides.length - getVisibleSlides();
-        currentIndex = currentIndex <= 0? maxIndex : currentIndex - 1;
+        currentIndex = currentIndex <= 0 ? (allSlides.length - getVisibleSlides()) : currentIndex - 1;
         updateCarousel();
       });
 
-      // Swipe en mobile
+      // Swipe
       let startX = 0;
       carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX);
       carousel.addEventListener('touchend', e => {
         const diff = startX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-          if (diff > 0) nextBtn.click();
-          else prevBtn.click();
-        }
+        if (Math.abs(diff) > 50) diff > 0 ? nextBtn?.click() : prevBtn?.click();
       });
 
-      updateIndicators();
       window.addEventListener('resize', updateCarousel);
+      updateIndicators();
 
     } catch (error) {
-      console.error("Error al cargar Drive:", error);
-      if (loadingEl) loadingEl.innerHTML = "<p style='color:red;'>No se pudieron cargar las fotos</p>";
+      console.error("Error Drive:", error);
+      if (loadingEl) loadingEl.innerHTML = "<p style='color:red;'>Error al cargar imágenes</p>";
     }
   }
-  
+
   // 4. FORMULARIO RESERVA
   document.getElementById('formReserva')?.addEventListener('submit', function(e) {
     e.preventDefault();
-    
-    // Validación checkbox
-    const acepto = document.getElementById('aceptoPoliticas')?.checked;
-    if (!acepto) {
-      alert("Debes aceptar las políticas de atención para continuar.");
+    if (!document.getElementById('aceptoPoliticas')?.checked) {
+      alert("Debes aceptar las políticas para continuar.");
       return;
     }
 
-    // Envío WhatsApp
-    const nombre = document.getElementById('nombre').value;
-const raza = document.getElementById('raza').value;
-const peso = document.getElementById('peso')?.value || 'No especificado';
-const fecha = document.getElementById('fecha').value;
-const comentario = document.getElementById('comentario').value;
-const numeroWhatsApp = "5491168959253";
-const mensaje = `Hola, quiero reservar un turno:%0A%0A*Mascota:* ${nombre}%0A*Raza:* ${raza}%0A*Peso:* ${peso} kg%0A*Fecha:* ${fecha}%0A*Comentario:* ${comentario}`;
-window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+    const m = `Hola, quiero reservar turno:%0A%0A*Mascota:* ${document.getElementById('nombre').value}%0A*Raza:* ${document.getElementById('raza').value}%0A*Peso:* ${document.getElementById('peso')?.value || 'N/A'} kg%0A*Fecha:* ${document.getElementById('fecha').value}%0A*Comentario:* ${document.getElementById('comentario').value}`;
+    window.open(`https://wa.me/5491168959253?text=${m}`, '_blank');
   });
 
-  // EJECUCIÓN INICIAL
+  // INICIALIZACIÓN
   document.addEventListener('DOMContentLoaded', cargarFotosDrive);
 </script>
 </body>
